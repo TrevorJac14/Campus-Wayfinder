@@ -1,11 +1,10 @@
-// Replace with your Mapbox access token
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2hhcmt0YXRvIiwiYSI6ImNtZGF3MjA1MzBueXgybW9pZGN2ZnptbHUifQ.Q1-o6C7ffwx9H9LKeBA_OQ';
 
 const map = new mapboxgl.Map({
   container: 'map',
-  style: 'mapbox://styles/mapbox/streets-v11',
+  style: 'mapbox://styles/mapbox/streets-v12',
   center: [-111.7830, 43.8172], // BYUI approximate center
-  zoom: 15
+  zoom: 16
 });
 
 // Add zoom and rotation controls
@@ -23,8 +22,6 @@ document.getElementById('generate').addEventListener('click', () => {
   const [startLat, startLng] = startValue.split(',').map(Number);
   const [endLat, endLng] = endValue.split(',').map(Number);
 
-  // Remove old markers if needed (not implemented here for brevity)
-
   // Add start marker
   new mapboxgl.Marker({ color: 'green' })
     .setLngLat([startLng, startLat])
@@ -37,7 +34,7 @@ document.getElementById('generate').addEventListener('click', () => {
     .setPopup(new mapboxgl.Popup().setText('End'))
     .addTo(map);
 
-  // Use Mapbox Directions API via fetch
+  // Generate route
   getRoute([startLng, startLat], [endLng, endLat]);
 });
 
